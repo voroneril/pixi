@@ -37,8 +37,8 @@ def rename_duplicate_file(path):
     return new_path
 
 
-def format_filename(id_, title):
-    return re.sub(r'[:\?<>\\*\|"\/]', "_", f"{id_}. {title}")
+def format_filename(id_, title, account):
+    return re.sub(r'[:\?<>\\*\|"\/]', "_", f"{id_}. {account} - {title}")
 
 
 def resolve_track_download(track_download, directory):
@@ -65,7 +65,7 @@ def download_image(
 
     for attempt in range(tries):
         try:
-            filename = format_filename(illustration.id, illustration.title)
+            filename = format_filename(illustration.id, illustration.title, illustration.user.account)
 
             if illustration.meta_pages:
                 click.echo(
